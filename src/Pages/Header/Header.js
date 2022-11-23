@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/ContextAPI';
 
 const Header = () => {
+    const {user} = useContext(AuthContext)
+    
 
-    const menuItems = <React.Fragment>
+    const menuItems = <React.Fragment> 
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/login'>Login</Link></li>
         <li><Link to='/about'>About</Link></li>
@@ -21,7 +24,7 @@ const Header = () => {
                            {menuItems}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">Resaling Mobiles</a>
+                    <a className="btn btn-ghost normal-case text-xl" >Resaling Mobiles</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
@@ -29,7 +32,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    
+                    {user.name}
                 </div>
             </div>
         </div>

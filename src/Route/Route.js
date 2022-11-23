@@ -18,5 +18,8 @@ export const routers = createBrowserRouter([
                 path: '/signup', element: <Signup></Signup>
             },
         ]
+    },
+    {
+        path: '*', element: <p>404</p>
     }
 ])

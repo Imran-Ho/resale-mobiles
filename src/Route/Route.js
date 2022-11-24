@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Login from "../Components/Login/Login";
 import Signup from "../Components/Signup/Signup";
 import DetailsView from "../Dashboard/DetailsView/DetailsView";
+import MyOrders from "../Dashboard/MyOrders/MyOrders";
 import EmptyPage from "../EmptyPage/EmptyPage";
 import DashboardLayout from "../layout/DashboardLayout";
 import Main from "../layout/Main";
@@ -37,6 +38,9 @@ export const routers = createBrowserRouter([
         children:[
             {
                 path: '/dashboard', element: <DetailsView></DetailsView>
+            },
+            {
+                path: '/dashboard/orders', element: <MyOrders></MyOrders> 
             }
         ]
     },

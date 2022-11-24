@@ -2,8 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import Login from "../Components/Login/Login";
 import Signup from "../Components/Signup/Signup";
 import DetailsView from "../Dashboard/DetailsView/DetailsView";
+import EmptyPage from "../EmptyPage/EmptyPage";
 import DashboardLayout from "../layout/DashboardLayout";
 import Main from "../layout/Main";
+import Blog from "../Pages/Blog/Blog";
 import Items from "../Pages/Home/Categories/Items/Items";
 import Home from "../Pages/Home/Home";
 
@@ -21,6 +23,9 @@ export const routers = createBrowserRouter([
                 path: '/signup', element: <Signup></Signup>
             },
             {
+                path: '/blog', element: <Blog></Blog>
+            },
+            {
                 path: '/category/:id', element: <Items></Items>,
                 loader:({params}) => fetch(`http://localhost:5000/items/${params.id}`)
             }
@@ -35,6 +40,6 @@ export const routers = createBrowserRouter([
         ]
     },
     {
-        path: '*', element: <p>404</p>
+        path: '*', element: <EmptyPage></EmptyPage>
     }
 ])

@@ -11,25 +11,44 @@ const Signup = () => {
     const [data, setData] = useState("");
 
     const signInHandler = data => {
-        console.log(data)
-        // newUserCreate(data.email, data.password)
-        //     .then(result => {
-        //         const user = result.user;
-        //         console.log(user)
-        //         // upate name of user
-        //         const userName = {
-        //             displayName: data.name
-        //         }
-        //         updateUserInfo(userName)
-        //             .then(() => {
-        //                 // save info to database
-        //             })
-        //             .catch(err => console.log(err));
-        //         toast.success('user created successfully')
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
+        // console.log(data)
+        newUserCreate(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                // update name of user
+                const userName = {
+                    displayName: data.name
+                }
+                updateUserInfo(userName)
+                    .then(() => {
+                        // save info to database
+                        saveUserInfo(data.name, data.email, data.type)
+                    })
+                    .catch(err => console.log(err));
+                toast.success('user created successfully')
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    // user info save to database
+    const saveUserInfo = (name, email, type) =>{
+        const user = {name, email, type};
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers:{
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data)
+            // setCreatedUserEmail(email)
+        })
+
     }
     return (
         <div className='h-[600px] flex justify-center items-center border'>
@@ -64,10 +83,9 @@ const Signup = () => {
                             pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: "Password must be strong" }
                         })} className="input input-bordered w-full" />
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
-                        <select className="input input-bordered w-full my-3">
-                            <option disabled selected>What do you want to be?</option>
-                            <option>Buyer</option>
-                            <option {...register('seller')} >Seller</option>
+                        <select {...register('type')} className="input input-bordered w-full my-3">
+                            <option selected>Buyer</option>
+                            <option>Seller</option>
                         </select>
 
                         <label className="label">

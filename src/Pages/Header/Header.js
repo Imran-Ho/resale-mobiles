@@ -8,7 +8,7 @@ const Header = () => {
 
     const menuItems = <React.Fragment> 
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/about'>About</Link></li>
+        <li><Link to='/blog'>Blog</Link></li>
         {!user?.uid ? 
         <li><Link to='/login'>Login</Link></li> 
         : 

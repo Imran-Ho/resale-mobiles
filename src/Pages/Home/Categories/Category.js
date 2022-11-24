@@ -12,7 +12,7 @@ const Category = ({category}) => {
                     <p>See the details and buy now</p>
                     <div className="card-actions justify-end">
                         <Link to={`/category/${id}`}>
-                        <button  className="btn btn-primary">Buy Now</button>
+                        <button  className="btn btn-primary">Book Now</button>
                         </Link>
                     </div>
                 </div>

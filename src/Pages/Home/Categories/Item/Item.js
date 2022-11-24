@@ -15,7 +15,7 @@ const Item = ({product}) => {
                         <p className='text-1xl font-bold'>Resale Price:$ {resale_price}</p>
                         <p className='text-1xl font-bold'>Used: {used_years} {used_years > 1 ? 'years' : 'year'}</p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Buy Now</button>
+                            <button className="btn btn-primary">Book Now</button>
                         </div>
                     </div>
                 </div>

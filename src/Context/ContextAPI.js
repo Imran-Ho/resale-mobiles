@@ -22,6 +22,12 @@ const ContextAPI = ({children}) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
+// update user
+    const updateUserInfo = (userInfo) =>{
+        setLoading(true)
+        return updateProfile(auth.currentUser, userInfo);
+    }
+
    
 // sign out
     const logOut = () =>{
@@ -40,7 +46,7 @@ const ContextAPI = ({children}) => {
     }, [])
 
 
-    const authInfo = {user, newUserCreate, logInWithEmail, logOut }
+    const authInfo = {user, newUserCreate, logInWithEmail, updateUserInfo, logOut }
     return (
         <div>
             <AuthContext.Provider value={authInfo}>

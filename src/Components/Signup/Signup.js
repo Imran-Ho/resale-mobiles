@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/ContextAPI';
 
 const Signup = () => {
-    const {newUserCreate} = useContext(AuthContext);
+    const {newUserCreate, updateUserInfo} = useContext(AuthContext);
     const { register,formState: { errors }, handleSubmit } = useForm();
     const [data, setData] = useState("");
 
@@ -16,6 +16,15 @@ const Signup = () => {
         .then(result =>{
             const user = result.user;
             console.log(user)
+            // upate name of user
+            const userName ={
+                displayName: data.name
+            }
+            updateUserInfo(userName)
+            .then(()=>{
+                // save info to database
+            })
+            .catch(err =>console.log(err));
             toast.success('user created successfully')
         })
         .catch(error => {

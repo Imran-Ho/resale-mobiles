@@ -3,13 +3,20 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/ContextAPI';
 
 const Header = () => {
-    const {user} = useContext(AuthContext)
+    const {user, logOut} = useContext(AuthContext)
     
 
     const menuItems = <React.Fragment> 
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/login'>Login</Link></li>
         <li><Link to='/about'>About</Link></li>
+        {!user?.uid ? 
+        <li><Link to='/login'>Login</Link></li> 
+        : 
+        <>
+        <li><Link to='/dashboard'>Dashboard</Link></li>
+        <li><button onClick={logOut}>Sign Out</button></li>
+        </>
+        }
     </React.Fragment>
 
     return (
@@ -24,7 +31,7 @@ const Header = () => {
                            {menuItems}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl" >Resaling Mobiles</a>
+                    <Link className="btn btn-ghost normal-case text-xl" >Mobiles Swapping</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
@@ -32,7 +39,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {user?.name}
+                    {user?.email}
                 </div>
             </div>
         </div>

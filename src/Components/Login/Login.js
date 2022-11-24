@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/ContextAPI';
 
 const Login = () => {
@@ -10,6 +10,8 @@ const Login = () => {
     const { register,formState: { errors }, handleSubmit } = useForm();
     const [data, setData] = useState("");
     const navigate = useNavigate()
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const signInHandler = data =>{
         console.log(data)
@@ -17,7 +19,7 @@ const Login = () => {
         .then(result =>{
             const user = result.user;
             console.log(user)
-            navigate('/')
+            navigate(from, {replace: true});
         })
         .catch(err =>{
             console.log(err)
@@ -31,7 +33,7 @@ const Login = () => {
         .then(result =>{
             const user = result.user;
             console.log(user)
-            navigate('/')
+            navigate(from, {replace: true});
         })
         .catch(err => console.log(err))
     }

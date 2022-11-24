@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/ContextAPI';
 
 const Signup = () => {
+    const {newUserCreate} = useContext(AuthContext);
     const { register,formState: { errors }, handleSubmit } = useForm();
     const [data, setData] = useState("");
 
-    const handleSignIn = data =>{
+    const signInHandler = data =>{
         console.log(data)
+        newUserCreate(data.email, data.password)
+        .then(result =>{
+            const user = result.user;
+            console.log(user)
+            toast.success('user created successfully')
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }
     return (
         <div className='h-[600px] flex justify-center items-center border'>
         <div className='w-96 p-6'>
             <h2 className='text-3xl text-center'>Sign Up</h2>
-            <form onSubmit={handleSubmit(handleSignIn)}>
+            <form onSubmit={handleSubmit(signInHandler)}>
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
                         <span className="label-text">Name</span>

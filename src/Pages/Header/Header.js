@@ -32,7 +32,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {user.name}
+                    {user?.name}
                 </div>
             </div>
         </div>

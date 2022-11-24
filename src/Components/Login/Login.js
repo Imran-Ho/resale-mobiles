@@ -1,20 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/ContextAPI';
 
 const Login = () => {
+    const {logInWithEmail} = useContext(AuthContext)
     const { register,formState: { errors }, handleSubmit } = useForm();
     const [data, setData] = useState("");
+    const navigate = useNavigate()
 
-    const handleSignIn = data =>{
+    const signInHandler = data =>{
         console.log(data)
+        logInWithEmail(data.email, data.password)
+        .then(result =>{
+            const user = result.user;
+            console.log(user)
+            navigate('/')
+        })
+        .catch(err =>{
+            console.log(err)
+        })
+
     }
     return (
         <div className='h-[500px] flex justify-center items-center border'>
         <div className='w-96 p-6'>
             <h2 className='text-3xl text-center'>Login</h2>
-            <form onSubmit={handleSubmit(handleSignIn)}>
+            <form onSubmit={handleSubmit(signInHandler)}>
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
                         <span className="label-text">Email</span>

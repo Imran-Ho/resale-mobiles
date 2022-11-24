@@ -5,7 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/ContextAPI';
 
 const Login = () => {
-    const {logInWithEmail} = useContext(AuthContext)
+    const {logInWithEmail, googleSignIn} = useContext(AuthContext)
+    
     const { register,formState: { errors }, handleSubmit } = useForm();
     const [data, setData] = useState("");
     const navigate = useNavigate()
@@ -22,6 +23,17 @@ const Login = () => {
             console.log(err)
         })
 
+    }
+
+// google sign in
+    const googleSign = () =>{
+        googleSignIn()
+        .then(result =>{
+            const user = result.user;
+            console.log(user)
+            navigate('/')
+        })
+        .catch(err => console.log(err))
     }
     return (
         <div className='h-[500px] flex justify-center items-center border'>
@@ -61,7 +73,7 @@ const Login = () => {
                 </div>
                 <p>New to Resale Mobiles ? <Link className='text-secondary' to='/signup'>Create new account</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>Sign with google</button>
+                <button onClick={googleSign} className='btn btn-outline w-full'>Sign with google</button>
             </form>
         </div>
     </div>

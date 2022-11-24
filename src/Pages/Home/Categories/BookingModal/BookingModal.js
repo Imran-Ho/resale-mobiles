@@ -1,14 +1,53 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../../Context/ContextAPI';
 
-const BookingModal = ({bookingModal}) => {
+const BookingModal = ({bookingModal, setBookingModal}) => {
     const {user} = useContext(AuthContext);
     const {resale_price, title} = bookingModal;
-    console.log(bookingModal)
+    // console.log(bookingModal)
 
 
     const bookingHandler = event =>{
-        event.preventdefault()
+        event.preventDefault()
+        const form = event.target;
+        const buyerName = form.name.value;
+        const email = form.email.value;
+        const phoneModel = form.model.value;
+        const resalePrice = form.price.value;
+        const phone = form.phone.value;
+        const location = form.location.value;
+
+        const bookingDetail ={
+            buyerName,
+            email,
+            phoneModel,
+            resalePrice,
+            phone,
+            location
+        }
+
+        fetch('http://localhost:5000/booking', {
+            method: 'POST',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(bookingDetail)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            if(data.acknowledged){
+                setBookingModal(null)
+                toast.success('Your booking has confirmed')
+                
+            }
+            else{
+                // it comes from server-end
+                toast.error(data.message)
+            }
+        })
+
 
 
     }
@@ -31,7 +70,7 @@ const BookingModal = ({bookingModal}) => {
                         <input name='model' type="text" defaultValue={title} disabled placeholder="your name" className="input w-full input-bordered" />
                         <input name='price' type="text" defaultValue={resale_price} disabled placeholder="your name" className="input w-full input-bordered" />
                         <input name='phone' type="text" placeholder="your phone" className="input w-full input-bordered" />
-                        <input name='text' type="text" placeholder="your location" className="input w-full input-bordered" />
+                        <input name='location' type="text" placeholder="your location" className="input w-full input-bordered" />
                         <br />
                         <input className='btn btn-primary w-full' type="submit" value="Submit" />
                     </form>

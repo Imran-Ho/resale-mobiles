@@ -4,7 +4,7 @@ import { AuthContext } from '../../../../Context/ContextAPI';
 
 const BookingModal = ({bookingModal, setBookingModal}) => {
     const {user} = useContext(AuthContext);
-    const {resale_price, title} = bookingModal;
+    const {resale_price, title, img} = bookingModal;
     // console.log(bookingModal)
 
 
@@ -24,7 +24,8 @@ const BookingModal = ({bookingModal, setBookingModal}) => {
             phoneModel,
             resalePrice,
             phone,
-            location
+            location,
+            img
         }
 
         fetch('http://localhost:5000/booking', {

@@ -3,6 +3,7 @@ import Login from "../Components/Login/Login";
 import Signup from "../Components/Signup/Signup";
 import DetailsView from "../Dashboard/DetailsView/DetailsView";
 import MyOrders from "../Dashboard/MyOrders/MyOrders";
+import Payment from "../Dashboard/MyOrders/Payment/Payment";
 import EmptyPage from "../EmptyPage/EmptyPage";
 import DashboardLayout from "../layout/DashboardLayout";
 import Main from "../layout/Main";
@@ -41,6 +42,10 @@ export const routers = createBrowserRouter([
             },
             {
                 path: '/dashboard/orders', element: <MyOrders></MyOrders> 
+            },
+            {
+                path: '/dashboard/payment/:id', element: <Payment></Payment>,
+                loader: ({params}) => fetch(`http://localhost:5000/booking/${params.id}`)
             }
         ]
     },

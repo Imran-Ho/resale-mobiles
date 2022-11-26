@@ -36,7 +36,9 @@ const MyOrders = () => {
                  </thead>
                  <tbody>
 
-                     { orders && orders?.map((order, i) => <tr>
+                     { orders && orders?.map((order, i) => <tr
+                        key={order._id}
+                        >
                         <th>{i + 1}</th>
                          <td>
                              <div className="avatar">
@@ -54,6 +56,11 @@ const MyOrders = () => {
                                                 className='btn btn-primary'
                                             >Pay</button>
                                         </Link>
+                                    }
+                                     {
+                                        order.resalePrice && order.paid && <span
+                                            className='text-primary'
+                                        >Paid</span>
                                     }
                          </td>
                      </tr>

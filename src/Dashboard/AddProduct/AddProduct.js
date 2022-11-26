@@ -11,7 +11,7 @@ const AddProduct = () => {
 
     // imgBB key from env.local
     const imageBBHostingKey = process.env.REACT_APP_imagebb_key;
-    console.log(imageBBHostingKey)
+    
 
     const handleAddProduct = data => {
         const image = data.photo[0];
@@ -25,7 +25,7 @@ const AddProduct = () => {
         .then(res => res.json())
         .then(imgData => {
             if(imgData.success){
-                console.log(imgData.data.url)
+                // console.log(imgData.data.url)
 
             // to send imageUrl and products info to Backend
 
@@ -103,7 +103,7 @@ const AddProduct = () => {
                             <label className="label">
                                 <span className="label-text">Location</span>
                             </label>
-                            <input type="location" {...register("location",)} className="input input-bordered w-full" />
+                            <input defaultValue='Chittagong' type="location" {...register("location",)} className="input input-bordered w-full" readOnly />
                         </div>
                     </div>
                     <div>
@@ -112,7 +112,7 @@ const AddProduct = () => {
                             <label className="label">
                                 <span className="label-text">Product Category</span>
                             </label>
-                            <input type="category" {...register("category",)} className="input input-bordered w-full" />
+                            <input placeholder='Brand name' type="category" {...register("category",)} className="input input-bordered w-full" />
                         </div>
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
@@ -124,13 +124,13 @@ const AddProduct = () => {
                             <label className="label">
                                 <span className="label-text">Year of Use</span>
                             </label>
-                            <input type="use" {...register("use",)} className="input input-bordered w-full" />
+                            <input placeholder='1 year' type="use" {...register("use",)} className="input input-bordered w-full" />
                         </div>
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
                                 <span className="label-text">Published Date</span>
                             </label>
-                            <input type="publishedDate" {...register("publishedDate",)} className="input input-bordered w-full" />
+                            <input placeholder='mm-dd-yyyy' type="publishedDate" {...register("publishedDate",)} className="input input-bordered w-full" />
                         </div>
                         <div className="form-control w-full max-w-xs">
                             <label className="label">

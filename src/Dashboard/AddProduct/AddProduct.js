@@ -9,65 +9,72 @@ const AddProduct = () => {
 
     const navigate = useNavigate();
 
-    // imgbb key from env.local
-    // const imageBBHostingKey = process.env.REACT_APP_imagebb_key;
-
-
-    // find only doctors specialty from database
-    // const {data: specialties, isLoading} = useQuery({
-    //     queryKey: ['specialty'],
-    //     queryFn: async () =>{
-    //         const res = await fetch('http://localhost:5000/appointmentSpecialty')
-    //         const data = await res.json();
-    //         return data;
-    //     }
-    // })
+    // imgBB key from env.local
+    const imageBBHostingKey = process.env.REACT_APP_imagebb_key;
+    console.log(imageBBHostingKey)
 
     const handleAddProduct = data => {
-        
-        const product ={
-            title: data.productName,
-            original_rice: data.originalPrice,
-            condition: data.condition,
-            contact: data.contact,
-            location: data.location,
-            category: data.category,
-            resale_price: data.resale,
-            used_years: data.use,
-            published_date: data.publishedDate,
-            seller_name: data.sellerName
-            
-            
-        }
-        console.log(product)
-
-        // save add product data to database
-        fetch('http://localhost:5000/addedProducts', {
+        const image = data.photo[0];
+        const formData = new FormData();
+        formData.append('image', image );
+        const url = `https://api.imgbb.com/1/upload?key=${imageBBHostingKey}`;
+        fetch(url, {
             method: 'POST',
-            headers: {
-                'content-type' : 'application/json',
-                // authorization: `bearer ${localStorage.getItem('accessToken')}`
-            },
-            body: JSON.stringify(product)
+            body: formData
         })
         .then(res => res.json())
-        .then(result =>{
-            console.log(result)
-            toast.success(`${data.productName} is added successfully`)
-            navigate('/dashboard/myProduct')
+        .then(imgData => {
+            if(imgData.success){
+                console.log(imgData.data.url)
+
+            // to send imageUrl and products info to Backend
+
+            const product ={
+                title: data.productName,
+                original_rice: data.originalPrice,
+                condition: data.condition,
+                contact: data.contact,
+                location: data.location,
+                category: data.category,
+                resale_price: data.resale,
+                used_years: data.use,
+                published_date: data.publishedDate,
+                seller_name: data.sellerName,
+                img:imgData.data.url
+                
+            }
+
+            // save doctor data to database
+            fetch('http://localhost:5000/addedProducts', {
+                method: 'POST',
+                headers: {
+                    'content-type' : 'application/json',
+                    // authorization: `bearer ${localStorage.getItem('accessToken')}`
+                },
+                body: JSON.stringify(product)
+            })
+            .then(res => res.json())
+            .then(result =>{
+                console.log(result)
+                toast.success(`${data.productName} is added successfully`)
+                navigate('/dashboard/myProduct')
+            })
+            }
         })
     }
+
+  
 
     // if(isLoading){
     //     return <Loading></Loading>
     // }
 
     return (
-        <div className='w-96 p-7'>
+        <div className='w-2/3 p-7'>
             <h3 className='text-3xl'>Add a product</h3>
             <form onSubmit={handleSubmit(handleAddProduct)}>
                 <div className='lg:flex'>
-                    <div className='mr-5'>
+                    <div className='mr-3'>
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
                                 <span className="label-text">Product Name</span>
@@ -121,20 +128,29 @@ const AddProduct = () => {
                         </div>
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
-                                <span className="label-text">published Date</span>
+                                <span className="label-text">Published Date</span>
                             </label>
                             <input type="publishedDate" {...register("publishedDate",)} className="input input-bordered w-full" />
                         </div>
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
-                                <span className="label-text">seller Name</span>
+                                <span className="label-text">Seller Name</span>
                             </label>
                             <input type="sellerName" {...register("sellerName",)} className="input input-bordered w-full" />
                         </div>
 
                     </div>
                 </div>
-                <input className='btn btn-accent w-full mt-6' value='Add Doctor' type="submit" />
+                <div className="form-control w-2/3">
+                    <label className="label">
+                        <span className="label-text">Keep your product image here</span>
+                    </label>
+                    <input type="file" {...register("photo", {
+                        required: "photo is required."
+                    })} className="input input-bordered w-full" />
+                    
+                </div>
+                <input className='btn btn-accent w-2/3 mt-6' value='Add Product' type="submit" />
 
             </form>
         </div>

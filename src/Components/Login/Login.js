@@ -3,15 +3,24 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/ContextAPI';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
     const {logInWithEmail, googleSignIn} = useContext(AuthContext)
     
     const { register,formState: { errors }, handleSubmit } = useForm();
     const [data, setData] = useState("");
+    // for jwt verification
+    const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [token] = useToken(loginUserEmail)
+
     const navigate = useNavigate()
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
+
+    if(token){
+        navigate(from, {replace: true});
+    }
 
     const signInHandler = data =>{
         console.log(data)
@@ -19,7 +28,7 @@ const Login = () => {
         .then(result =>{
             const user = result.user;
             console.log(user)
-            navigate(from, {replace: true});
+            setLoginUserEmail(data.email)
         })
         .catch(err =>{
             console.log(err)

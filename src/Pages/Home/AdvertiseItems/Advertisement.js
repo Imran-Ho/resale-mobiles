@@ -4,13 +4,10 @@ const Advertisement = ({ advertisement, removingAction }) => {
     const {_id, title, original_rice, condition, location, resale_price, used_years, published_date, img } = advertisement;
     return (
         <div>
-            <div>
-                <h3 className='text-3xl text-center text-primary mt-10 font-bold'>Advertising Products</h3>
-                <p className='text=1xl text-center text-secondary mb-5'>We give opportunity to put used products for advertising.</p>
-            </div>
+           
             <div className="card w-96 bg-base-100 shadow-xl">
                 <figure className="px-10 pt-10">
-                    <img src={img} alt="Shoes" className="rounded-xl" />
+                    <img src={img} style={{height: '200px'}} alt="Shoes" className="rounded-xl" />
                 </figure>
                 <div className="card-body">
                     <h2 className="card-title text-primary">Model Name: {title}</h2>

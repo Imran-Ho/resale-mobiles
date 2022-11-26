@@ -2,13 +2,23 @@ import React, { useContext } from 'react';
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/ContextAPI';
+import useToken from '../../hooks/useToken';
 
 const Signup = () => {
     const { newUserCreate, updateUserInfo } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [data, setData] = useState("");
+    const navigate = useNavigate();
+
+    const [createdUserEmail, setCreatedUserEmail] = useState('');
+    const [token] = useToken(createdUserEmail);
+
+    if(token){
+        navigate('/');
+    }
+
 
     const signInHandler = data => {
         // console.log(data)
@@ -46,10 +56,24 @@ const Signup = () => {
         .then(res => res.json())
         .then(data =>{
             console.log(data)
-            // setCreatedUserEmail(email)
+            setCreatedUserEmail(email)
         })
 
     }
+
+
+    // jwt token call
+        const getEntryToken = email =>{
+            fetch(`http://localhost:5000/jwt?email=${email}`)
+            .then(res => res.json())
+            .then(data =>{
+                if(data.accessToken){
+                    localStorage.setItem('entryToken', data.accessToken);
+                    navigate('/')
+                }
+            })
+        }
+
     return (
         <div className='h-[600px] flex justify-center items-center border'>
             <div className='w-96 p-6'>

@@ -13,13 +13,13 @@ const MyProducts = () => {
             return data;
         }
     })
-    // console.log(addedProducts)
+    
 
-
+    
 
     // for product advertisement
     const forAdvertise = productForAdvertise =>{
-        console.log(productForAdvertise)
+        // console.log(productForAdvertise)
         
         fetch('http://localhost:5000/advertisement', {
                 method: 'POST',
@@ -50,6 +50,7 @@ const MyProducts = () => {
         })
         .then(res => res.json())
         .then(data =>{
+            console.log(data)
             if(data.deletedCount > 0){
                 refetch()
                 toast.success(`added product deleted successfully`)

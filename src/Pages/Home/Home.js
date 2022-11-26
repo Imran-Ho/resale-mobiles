@@ -6,7 +6,7 @@ import EmailForm from './EmailForm/EmailForm';
 
 const Home = () => {
     return (
-        <div>
+        <div className='lg:mx-10 sm:mx-3'>
             <Banner></Banner>
             <Categories></Categories>
             <AdvertiseItems></AdvertiseItems>

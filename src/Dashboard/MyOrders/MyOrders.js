@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/ContextAPI';
 
@@ -9,7 +10,7 @@ const MyOrders = () => {
 
     const url = `http://localhost:5000/booking?email=${user?.email}`
 
-    const {data: orders } = useQuery({
+    const {data: orders, refetch } = useQuery({
         queryKey: ['booking', user?.email],
         queryFn: async () => {
             const res = await fetch(url, {
@@ -23,6 +24,23 @@ const MyOrders = () => {
         
     })
 
+    const orderDelete = id =>{
+        console.log(id)
+        fetch(`http://localhost:5000/booking/${id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.deletedCount > 0) {
+                    refetch()
+                    toast.success(`Order deleted successfully`)
+                }
+            })
+    }
     return (
        
          <div>
@@ -54,10 +72,12 @@ const MyOrders = () => {
                          <td>{order.phoneModel}</td>
                          <td>$ {order.resalePrice}</td>
                          <td>
+                            <button onClick={()=>orderDelete(order._id)} className='btn btn-sm mr-5'>Delete</button>
+                         
                          {
                                         order.resalePrice && !order.paid && <Link to={`/dashboard/payment/${order._id}`}>
                                             <button
-                                                className='btn btn-primary'
+                                                className='btn btn-sm btn-primary '
                                             >Pay</button>
                                         </Link>
                                     }

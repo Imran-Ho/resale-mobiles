@@ -13,8 +13,9 @@ const AllSellers = () => {
         }
     })
 
+// delete user account
     const deleteSeller = id =>{
-        console.log(id)
+        
         fetch(`http://localhost:5000/sellers/${id}`, {
             method: 'DELETE',
             headers: {
@@ -30,6 +31,7 @@ const AllSellers = () => {
                 }
             })
     }
+    
     return (
         <div>
             <h3 className='text-3xl text-center text-purple-800 my-4'>Details of All Sellers</h3>

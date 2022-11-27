@@ -8,7 +8,7 @@ import { AuthContext } from '../../Context/ContextAPI';
 const MyOrders = () => {
     const {user} = useContext(AuthContext);
 
-    const url = `http://localhost:5000/booking?email=${user?.email}`
+    const url = `https://project-12-server.vercel.app/booking?email=${user?.email}`
 
     const {data: orders, refetch } = useQuery({
         queryKey: ['booking', user?.email],
@@ -26,7 +26,7 @@ const MyOrders = () => {
 
     const orderDelete = id =>{
         // console.log(id)
-        fetch(`http://localhost:5000/booking/${id}`, {
+        fetch(`https://project-12-server.vercel.app/booking/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

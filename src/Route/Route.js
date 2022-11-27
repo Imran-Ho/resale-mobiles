@@ -34,7 +34,7 @@ export const routers = createBrowserRouter([
             },
             {
                 path: '/category/:id', element: <PrivateRoute><Items></Items></PrivateRoute>,
-                loader:({params}) => fetch(`http://localhost:5000/items/${params.id}`)
+                loader:({params}) => fetch(`https://project-12-server.vercel.app/items/${params.id}`)
             }
         ]
     },
@@ -56,7 +56,7 @@ export const routers = createBrowserRouter([
             },
             {
                 path: '/dashboard/payment/:id', element: <Payment></Payment>,
-                loader: ({params}) => fetch(`http://localhost:5000/booking/${params.id}`)
+                loader: ({params}) => fetch(`https://project-12-server.vercel.app/booking/${params.id}`)
             },
             {
                 path: '/dashboard/add-product', element: <AddProduct></AddProduct>

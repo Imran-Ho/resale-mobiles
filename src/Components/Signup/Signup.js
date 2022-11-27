@@ -46,7 +46,7 @@ const Signup = () => {
     // user info save to database
     const saveUserInfo = (name, email, type) =>{
         const user = {name, email, type};
-        fetch('http://localhost:5000/users', {
+        fetch('https://project-12-server.vercel.app/users', {
             method: 'POST',
             headers:{
                 'content-type' : 'application/json'

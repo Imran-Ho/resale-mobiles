@@ -8,7 +8,7 @@ const MyProducts = () => {
     const { data: addedProducts, isLoading, refetch } = useQuery({
         queryKey: ['addedProducts'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/addedProducts')
+            const res = await fetch('https://project-12-server.vercel.app/addedProducts')
             const data = await res.json();
             return data;
         }
@@ -21,7 +21,7 @@ const MyProducts = () => {
     const forAdvertise = productForAdvertise =>{
         // console.log(productForAdvertise)
         
-        fetch('http://localhost:5000/advertisement', {
+        fetch('https://project-12-server.vercel.app/advertisement', {
                 method: 'POST',
                 headers: {
                     'content-type' : 'application/json',
@@ -42,7 +42,7 @@ const MyProducts = () => {
     // added product deleting action here
     const deletingAction = id =>{
         
-        fetch(`http://localhost:5000/addedProducts/${id}`,{
+        fetch(`https://project-12-server.vercel.app/addedProducts/${id}`,{
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

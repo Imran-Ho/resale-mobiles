@@ -6,8 +6,8 @@ const EmailForm = () => {
         
         >
             <div>
-                <h2 className='text-primary font-bold text-xl pt-16 text-center'>Contact Us</h2>
-                <h2 className='text-white text-3xl text-center'>Stay connected with us</h2>
+                <h2 className='text-3xl text-center text-primary mt-10 font-bold'>Contact Us</h2>
+                <h2 className='text=1xl text-center text-secondary mb-10'>Stay connected with us</h2>
             </div>
             <div>
                 <div className="hero">

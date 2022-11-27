@@ -57,22 +57,13 @@ const Signup = () => {
         .then(data =>{
             console.log(data)
             setCreatedUserEmail(email)
+            
         })
 
     }
 
 
-    // jwt token call
-        const getEntryToken = email =>{
-            fetch(`http://localhost:5000/jwt?email=${email}`)
-            .then(res => res.json())
-            .then(data =>{
-                if(data.accessToken){
-                    localStorage.setItem('entryToken', data.accessToken);
-                    navigate('/')
-                }
-            })
-        }
+    
 
     return (
         <div className='h-[600px] flex justify-center items-center border'>
@@ -123,8 +114,7 @@ const Signup = () => {
                     <p>{data}</p>
                     <input className='btn btn-accent w-full' value='Sign Up' type="submit" />
                     <p>already have an account <Link className='text-secondary' to='/login'>Log in</Link></p>
-                    <div className="divider">OR</div>
-                    <button className='btn btn-outline w-full'>Sign with google</button>
+                    
                 </form>
             </div>
         </div>

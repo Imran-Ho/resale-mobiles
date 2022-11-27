@@ -78,13 +78,13 @@ const Login = () => {
                 </div>
                 
                 <p>{data}</p>
-                <input className='btn btn-accent w-2/3' value='Login' type="submit" />
+                <input className='btn btn-accent w-full' value='Login' type="submit" />
                 <div>
                     {/* {loginError && <p>{loginError}</p>} */}
                 </div>
                 <p>New to Resale Mobiles ? <Link className='text-secondary' to='/signup'>Create new account</Link></p>
                 <div className="divider">OR</div>
-                <button onClick={googleSign} className='btn btn-outline w-full'>Sign with google</button>
+                <button onClick={googleSign} className='btn btn-outline w-full text-secondary'>Sign with google</button>
             </form>
         </div>
     </div>

@@ -59,7 +59,7 @@ const MyProducts = () => {
     }
     return (
         <div>
-            <h2>my product:{addedProducts?.length}</h2>
+            <h2 className='text-center text-3xl my-3'>Product what you added</h2>
             <div>
                 <div className="overflow-x-auto">
                     <table className="table w-full">

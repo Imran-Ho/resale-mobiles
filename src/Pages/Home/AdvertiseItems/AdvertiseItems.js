@@ -37,16 +37,19 @@ const AdvertiseItems = () => {
                 }
             })
     }
+    // console.log(advertisements.length)
     return (
         <div className=''>
+            
             <div>
                 {
-                    advertisements && <>
+                    advertisements.length > 0 ? <>
                         <div>
                             <h3 className='text-3xl text-center text-primary mt-10 font-bold'>Advertising Products</h3>
                             <p className='text=1xl text-center text-secondary mb-5'>We give opportunity to put used products for advertising.</p>
                         </div>
                     </>
+                    : ''
                 }
             </div>
             <div className='grid lg:grid-cols-3 gap-3'>

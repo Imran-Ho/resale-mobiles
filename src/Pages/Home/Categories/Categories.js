@@ -10,9 +10,9 @@ const Categories = () => {
         .then(res => res.json())
     })
 
-    if(isLoading){
-        return <Loading></Loading>
-    }
+    // if(isLoading){
+    //     return <Loading></Loading>
+    // }
     return (
         <div>
             <div>

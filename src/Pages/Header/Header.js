@@ -38,7 +38,7 @@ const Header = () => {
                     {menuItems}
                     </ul>
                 </div>
-                <div className="navbar-end sm:hidden">
+                <div className="navbar-end">
                     {user?.email}
                 </div>
                 <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">

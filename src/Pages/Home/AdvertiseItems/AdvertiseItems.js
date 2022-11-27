@@ -20,22 +20,22 @@ const AdvertiseItems = () => {
 
 
     // added product deleting action here
-    const removingAction = productId => {
-        // console.log(productId)
-        fetch(`http://localhost:5000/advertisement/${productId}`, {
+    const removingAction = id => {
+        console.log(id)
+        fetch(`http://localhost:5000/advertisement/${id}`,{
             method: 'DELETE',
             headers: {
                 // authorization: `bearer ${localStorage.getItem('accessToken')}`
             }
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if (data.deletedCount > 0) {
-                    refetch()
-                    toast.success(`advertising product deleted successfully`)
-                }
-            })
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data)
+            if(data.deletedCount > 0){
+                refetch()
+                toast.success(`added product deleted successfully`)
+            }
+        })
     }
     // console.log(advertisements.length)
     return (

@@ -25,7 +25,7 @@ const MyOrders = () => {
     })
 
     const orderDelete = id =>{
-        console.log(id)
+        // console.log(id)
         fetch(`http://localhost:5000/booking/${id}`, {
             method: 'DELETE',
             headers: {

@@ -14,7 +14,7 @@ const Category = ({ category }) => {
                         <p>See the details and Book now</p>
                         <div className="card-actions">
                         <Link to={`/category/${id}`}>
-                            <button className="btn btn-primary">Book Now</button>
+                            <button className="btn btn-md btn-primary">See More</button>
                         </Link>
                         </div>
                     </div>

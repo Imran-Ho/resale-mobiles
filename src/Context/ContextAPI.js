@@ -41,6 +41,8 @@ const ContextAPI = ({children}) => {
         setLoading(true)
         return signOut(auth)
     }
+
+    
 // observer
     useEffect(() =>{
         const unsubscribe = onAuthStateChanged(auth, currentUser =>{

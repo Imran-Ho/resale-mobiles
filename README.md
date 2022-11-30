@@ -1,3 +1,25 @@
+# https://resale-mobiles.web.app/
+
+This project is based on reselling used products which is created using ReactJS, ExpressJS and MongoDB. 
+
+Here, firebase is used for authentication and for giving security. protecting unauthorized access, JWT token is used for   
+
+## Details of the Project
+
+### Admin panel
+
+In this project, there are some specific aspects for Admin in Dashbord. where admin can see the buyers and sellers details individually.
+Here, 
+
+### Users panel 
+
+#### This project contains two different priority based critaria for created users. one is seller and another one is buyer.
+
+Seller has the ability to added used product for sale and can give ad for showing visitors if want to buy.
+
+on the other hand, Buyer can see the products from three different categoriey if he visit and can book for purchasing the product from My Order section in Dashboaard and can use Card for payment.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
